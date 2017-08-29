@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.bootcss.com/avalon.js/2.0b1/avalon.js"></script>
+</head>
+<body ms-controller="vm">
+    <button onclick="show()">showAll</button>
+    <button onclick="addOne()">addOne</button>
+    <button onclick="addList()">addList</button>
+
+    <div>
+        <h3>Employee</h3>
+        <button onclick="showEmEx()">showEmEx</button>
+        <button onclick="showPerEx()">showPerEx</button>
+    </div>
+
+
+
+</body>
+
+
+
+<script>
+    function show() {
+        $.ajax({
+            url:"/showPerson",
+            success:function () {
+
+            }
+        })
+    }
+    function showEmEx() {
+        $.ajax({
+            url:"/showEmEx",
+            success:function () {
+            }
+        })
+    }
+
+    function showPerEx() {
+        $.ajax({
+            url:"/showPerEx",
+            success:function () {
+            }
+        })
+    }
+
+    function addOne() {
+        $.ajax({
+            url:"/addOne",
+            success:function () {
+            }
+        })
+    }
+    function addList() {
+        $.ajax({
+            url:"/addList",
+            success:function () {
+            }
+        })
+    }
+
+
+    avalon.define({
+        $id:'vm',
+        name:"ddwe",
+        show:function () {
+            $.ajax({
+                url:"/showAll",
+                success:function () {
+                }
+            })
+        }
+    })
+</script>
+
+
+</html>
