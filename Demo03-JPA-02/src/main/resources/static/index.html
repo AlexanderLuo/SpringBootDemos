@@ -7,15 +7,23 @@
     <script src="https://cdn.bootcss.com/avalon.js/2.0b1/avalon.js"></script>
 </head>
 <body ms-controller="vm">
-    <button onclick="show()">showAll</button>
-    <button onclick="addOne()">addOne</button>
-    <button onclick="addList()">addList</button>
+    <div>
+        <h3>Person</h3>
+        <button onclick="javascript:$.ajax({url:'/addRandPer'}); ">addRandPer</button>
+        <button onclick="javascript:$.ajax({url:'/addRandPerWithEm'}); ">addRandPerWithEm</button>
+    </div>
+
+
 
     <div>
         <h3>Employee</h3>
-        <button onclick="showEmEx()">showEmEx</button>
-        <button onclick="showPerEx()">showPerEx</button>
+        <button onclick="javascript:$.ajax({url:'/queryEmPage'}).done(function(res){console.log(res)}); ">showEmPage</button>
+        <button onclick="javascript:$.ajax({url:'/addRandEm'}); ">addRandEx</button>
+        <button onclick="javascript:$.ajax({url:'/updataEm'}); ">updataEm</button>
+        <button onclick="javascript:$.ajax({url:'/delEm'}); ">delEm</button>
     </div>
+
+
 
 
 
@@ -47,6 +55,13 @@
             }
         })
     }
+    function showEmPage() {
+        $.ajax({
+            url:"/showEmPage",
+            success:function () {
+            }
+        })
+    }
 
     function addOne() {
         $.ajax({
@@ -67,13 +82,6 @@
     avalon.define({
         $id:'vm',
         name:"ddwe",
-        show:function () {
-            $.ajax({
-                url:"/showAll",
-                success:function () {
-                }
-            })
-        }
     })
 </script>
 

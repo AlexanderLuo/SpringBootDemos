@@ -1,6 +1,11 @@
 package com.alex.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/8/28.
@@ -9,19 +14,18 @@ import javax.persistence.*;
 @Table(name = "person")
 public class Person {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(name="id",length = 36)
+    private String id;
     @Column(name="name")
     private String name;
     @Column(name="age")
     private int age;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+
+
+
+
     public String getName() {
         return name;
     }
@@ -34,10 +38,17 @@ public class Person {
     public void setAge(int age) {
         this.age = age;
     }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
 
 
-
-    @OneToOne(mappedBy="person",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    @OneToOne(targetEntity = Employee.class, cascade =CascadeType.ALL)
+    @JoinColumn(name="em_id",foreignKey = @ForeignKey(name = "none"))
+    @JsonIgnore
     private Employee employee;
     public Employee getEmployee() {
         return employee;
@@ -46,4 +57,19 @@ public class Person {
         this.employee = employee;
     }
 
+
+    /**
+     * 工作列表
+     */
+    @OneToMany(targetEntity = Work.class, cascade =CascadeType.ALL)
+    @JoinColumn(name = "id", foreignKey = @ForeignKey(name = "none"))
+    public List<Work> worksList;
+
+    public List<Work> getWorksList() {
+        return worksList;
+    }
+
+    public void setWorksList(List<Work> worksList) {
+        this.worksList = worksList;
+    }
 }
